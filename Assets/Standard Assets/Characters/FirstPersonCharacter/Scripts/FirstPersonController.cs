@@ -49,6 +49,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float time;
         public Text Timer;
         public int TimeRemaining;
+        public GameObject coinfx;
 
         // Use this for initialization
         private void Start()
@@ -63,6 +64,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            
         }
 
 
@@ -101,6 +104,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 SceneManager.LoadScene("LoseScene");
             }
+
+            
         }
 
 
@@ -282,12 +287,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 score = score + 10;
                 Destroy(other.gameObject);
                 scoretxt.text = "Score: " + score;
+                Instantiate(coinfx, other.transform.position, Quaternion.identity);
+                
             }
             if(other.gameObject.tag == "Water")
             {
                 SceneManager.LoadScene("LoseScene");
                 
             }
+        
         }
+        
     }
 }
