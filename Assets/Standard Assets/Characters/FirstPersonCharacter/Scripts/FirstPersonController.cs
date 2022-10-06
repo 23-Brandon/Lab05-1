@@ -46,6 +46,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public int score;
         public Text scoretxt;
+        public float time;
+        public Text Timer;
+        public int TimeRemaining;
 
         // Use this for initialization
         private void Start()
@@ -86,6 +89,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            if(score >= 60)
+            {
+                SceneManager.LoadScene("WinScene");
+            }
+            time -= Time.deltaTime;
+            TimeRemaining = Mathf.FloorToInt(time % 60);
+            Timer.text = "Timer: " + TimeRemaining.ToString();
+            if(time <= 0)
+            {
+                SceneManager.LoadScene("LoseScene");
+            }
         }
 
 
@@ -271,6 +286,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(other.gameObject.tag == "Water")
             {
                 SceneManager.LoadScene("LoseScene");
+                
             }
         }
     }

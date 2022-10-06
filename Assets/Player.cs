@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int score;
+    public float time;
+    public Text Timer;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +17,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnTriggerEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Coin")
-        {
-            score = score + 10;
-            Destroy(other.gameObject);
-        }
+        time -= Time.deltaTime;
+        Timer.text = "Timer: " + time;
     }
 }
